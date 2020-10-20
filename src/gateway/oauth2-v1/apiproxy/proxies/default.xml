@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <PreFlow name="PreFlow">
+        <Request/>
+        <Response/>
+    </PreFlow>
+    <Flows>
+        <Flow name="Authorize">
+            <Description></Description>
+            <Request>
+                <Step>
+                    <Name>AM-SetApiKeyFromClientId</Name>
+                </Step>
+                <Step>
+                    <Name>VAK-ClientId</Name>
+                </Step>
+                <Step>
+                    <Name>AE-DeveloperApp</Name>
+                </Step>
+                <Step>
+                    <Name>EV-AppCredentials</Name>
+                </Step>
+                <Step>
+                    <Name>RF-InvalidRedirectUri</Name>
+                    <Condition>request.queryparam.redirect_uri != flow.redirect_uri</Condition>
+                </Step>
+                <Step>
+                    <Name>JS-PrepareOktaAuthorizeUrl</Name>
+                </Step>
+                <Step>
+                    <Name>PC-StoreRequestData</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>AM-Redirect2OktaAuthorize</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/authorize") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="OktaCallback">
+            <Description></Description>
+            <Request>
+                <Step>
+                    <Name>AM-SetCacheKeyFromState</Name>
+                </Step>
+                <Step>
+                    <Name>RF-AuthorizationCodeMissing</Name>
+                    <Condition>request.queryparam.code == null</Condition>
+                </Step>
+                <Step>
+                    <Name>LC-LookupAuthorizeRequest</Name>
+                </Step>
+                <Step>
+                    <Name>RF-RequestExpired</Name>
+                    <Condition>(flow.authorize_request == null)</Condition>
+                </Step>
+                <Step>
+                    <Name>IC-AuthorizationRequest</Name>
+                </Step>
+                <Step>
+                    <Name>JS-PrepareAuthZCodeParams</Name>
+                </Step>
+                <Step>
+                    <Name>OAuth2-MintAuthorizationCode</Name>
+                </Step>
+                <Step>
+                    <Name>JS-BuildClientRedirect</Name>
+                </Step>
+                <Step>
+                    <Name>PC-StoreRequestData</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>AM-Redirect2ClientCallback</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/callback") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="AccessToken">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>AM-SetCacheKeyFromCode</Name>
+                </Step>
+                <Step>
+                    <Name>LC-LookupAuthorizeRequest</Name>
+                </Step>
+                <Step>
+                    <Name>RF-RequestExpired</Name>
+                    <Condition>(flow.authorize_request == null)</Condition>
+                </Step>
+                <Step>
+                    <Name>IC-AuthorizationRequest</Name>
+                </Step>
+                <Step>
+                    <Name>JS-PrepareTokenRequest</Name>
+                </Step>
+                <Step>
+                    <Name>AM-TokenRequest</Name>
+                </Step>
+                <Step>
+                    <Name>SC-TokenRequest</Name>
+                </Step>
+                <Step>
+                    <Name>EV-TokenData</Name>
+                </Step>
+                <Step>
+                    <Name>JWT-DecodeIdToken</Name>
+                </Step>
+                <Step>
+                    <Name>JWT-DecodeAccessToken</Name>
+                </Step>
+                <Step>
+                    <Name>JS-PrepareTokensClaims</Name>
+                </Step>
+                <Step>
+                    <Name>JS-AdjustExpiresInValue</Name>
+                </Step>
+                <Step>
+                    <Name>VAK-ClientId</Name>
+                </Step>
+                <Step>
+                    <Name>AE-DeveloperApp</Name>
+                </Step>
+                <Step>
+                    <Name>EV-AppCredentials</Name>
+                </Step>
+                <Step>
+                    <Name>BA-EncodeCredentials</Name>
+                </Step>
+                <Step>
+                    <Name>OAuth2-MintAccessToken</Name>
+                </Step>
+                <Step>
+                    <Name>IC-AuthorizationRequest</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="RevokeAccessToken">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/revoke") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="Logout">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/logout") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="OktaInlineHook">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>JS-Debug</Name>
+                </Step>
+                <Step>
+                    <Name>EV-ExtractStateFromHookRequest</Name>
+                </Step>
+                <Step>
+                    <Name>LC-LookupAuthorizeRequest</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>JS-CreateClaimCommands</Name>
+                </Step>
+                <Step>
+                    <Name>JS-Debug</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/oktainlinehook") and (request.verb = "POST")</Condition>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>${proxy.path.prefix}/oauth2/v1${proxy.path.suffix}</BasePath>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="noroute" />
+        <!--<Condition>(proxy.pathsuffix MatchesPath "/oktainlinehook") and (request.verb = "POST")</Condition>-->
+    <!--</RouteRule>-->
+    <!--<RouteRule name="inlinehook">-->
+        <!--<Condition>(proxy.pathsuffix MatchesPath "/oktainlinehook") and (request.verb = "POST")</Condition>-->
+    <!--</RouteRule>-->
+    <!--<RouteRule name="authorize">-->
+        <!--<Condition>(proxy.pathsuffix MatchesPath "/authorize") and (request.verb = "GET")</Condition>-->
+    <!--</RouteRule>-->
+    <!--<RouteRule name="okta-callback">-->
+        <!--<Condition>(proxy.pathsuffix MatchesPath "/callback") and (request.verb = "GET")</Condition>-->
+    <!--</RouteRule>-->
+    <!--<RouteRule name="default">-->
+        <!--<TargetEndpoint>default</TargetEndpoint>-->
+    <!--</RouteRule>-->
+</ProxyEndpoint>

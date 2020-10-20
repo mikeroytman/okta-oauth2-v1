@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AM-SetApiKeyFromClientId">
+    <DisplayName>AM-SetApiKeyFromClientId</DisplayName>
+    <AssignVariable>
+        <Name>flow.client_id</Name>
+        <Ref>request.queryparam.client_id</Ref>
+    </AssignVariable>
+</AssignMessage>

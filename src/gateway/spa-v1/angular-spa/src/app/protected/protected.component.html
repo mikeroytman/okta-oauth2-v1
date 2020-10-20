@@ -1,0 +1,57 @@
+<div class="card">
+
+    <div class="container">
+        <h4><b>Protected Data</b></h4>
+        <div class="card">
+            <table style="width:100%">
+                <tr>
+                    <td>User Name:</td>
+                    <td>{{ decoded_idtoken.name }}</td>
+                </tr>
+                <tr>
+                    <td>User Email:</td>
+                    <td>{{ decoded_idtoken.email }}</td>
+                </tr>
+                <tr>
+                    <td>Issuer:</td>
+                    <td>{{ decoded_idtoken.iss }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <hr>
+    <div class="container">
+        <h4><b>Tokens:</b></h4>
+        <div class="card">
+            <table style="width:100%">
+                <tr>
+                    <td>ID Token:</td>
+                    <td><textarea cols="30" #txtToken>{{ idtoken }}</textarea></td>
+                </tr>
+                <tr>
+                    <td>Access Token:</td>
+                    <td><textarea cols="30" #txtAccToken>{{ accesstoken }}</textarea></td>
+                </tr>
+                <tr>
+                    <td>API URL:</td>
+                    <td>{{ displayURL }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button (click)="send(txtToken.value, txtAccToken.value)">Submit</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <hr>
+    <div class="container" *ngIf="response">
+        <h4><b>Response:</b></h4>
+        <div class="card">
+            <textarea width="100%" cols="50" rows="30">{{responseData |json}}</textarea><br>
+            <button (click)="clear()">Clear</button>
+        </div>
+    </div>
+</div>

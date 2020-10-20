@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AM-TokenRequest">
+    <DisplayName>AM-TokenRequest</DisplayName>
+    <Properties/>
+    <Set>
+        <Headers>
+            <Header name="Content-Type">application/x-www-form-urlencoded</Header>
+        </Headers>
+        <FormParams>
+            <FormParam name="client_id">{flow.idp.client_id}</FormParam>
+            <FormParam name="code">{flow.idp.code}</FormParam>
+            <FormParam name="redirect_uri">{flow.idp.redirect_uri}</FormParam>
+            <FormParam name="grant_type">{flow.idp.grant_type}</FormParam>
+            <FormParam name="code_verifier">{flow.idp.code_verifier}</FormParam>
+        </FormParams>
+        <Verb>POST</Verb>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="true" transport="http" type="request">tokenRequest</AssignTo>
+</AssignMessage>

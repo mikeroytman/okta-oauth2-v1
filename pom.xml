@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>oauth2-v1</groupId>
+    <artifactId>parent-pom</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <!--suppress UnresolvedMavenProperty -->
+        <org>${env.APIGEE_ORG}</org>  <!-- default org, replace with default org to avoid passing parameter e.g. -Dorg testmyapi -->
+        <options>validate</options>  <!-- default org, replace with default org to avoid passing parameter e.g. -Dorg testmyapi -->
+        <apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
+        <apigee.apiversion>v1</apigee.apiversion>
+        <!--suppress UnresolvedMavenProperty -->
+        <apigee.org>${env.APIGEE_ORG}</apigee.org>
+        <!--suppress UnresolvedMavenProperty -->
+        <apigee.username>${env.APIGEE_USERNAME}</apigee.username>
+        <!--suppress UnresolvedMavenProperty -->
+        <apigee.password>${env.APIGEE_PASSWORD}</apigee.password>
+        <apigee.options>update</apigee.options>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <apigee.env>dev</apigee.env>
+                <northbound.domain>${apigee.org}-${apigee.env}.apigee.net</northbound.domain>
+                <proxy.name.prefix>oktademo-</proxy.name.prefix>
+                <proxy.path.prefix>/oktademo</proxy.path.prefix>
+                <proxy.name.suffix>-${user.name}</proxy.name.suffix>
+                <proxy.path.suffix>-${user.name}</proxy.path.suffix>
+
+                <proxy.oauth2-v1.baseUrl>https://${northbound.domain}${proxy.path.prefix}/oauth2/v1${proxy.path.suffix}</proxy.oauth2-v1.baseUrl>
+                <proxy.spa-v1.baseUrl>https://${northbound.domain}${proxy.path.prefix}/spa${proxy.path.suffix}</proxy.spa-v1.baseUrl>
+                <proxy.protected-endpoint-v1.baseUrl>https://${northbound.domain}${proxy.path.prefix}/protected-endpoint/v1${proxy.path.suffix}</proxy.protected-endpoint-v1.baseUrl>
+
+
+                <!--<okta.clientId>T1AzMaG3bLQcrZ4sAHWiX3mvVanEVCVf</okta.clientId>-->
+                <okta.clientId>YFfyQtptGa0vJLJuJVFucRcoVzt9kbsL</okta.clientId>
+                <okta.baseUrl>${proxy.oauth2-v1.baseUrl}</okta.baseUrl>
+                <okta.tokenUrl>${proxy.oauth2-v1.baseUrl}/token</okta.tokenUrl>
+                <okta.authorizeUrl>${proxy.oauth2-v1.baseUrl}/authorize</okta.authorizeUrl>
+                <okta.logoutUrl>${proxy.oauth2-v1.baseUrl}/logout</okta.logoutUrl>
+                <okta.revokeUrl>${proxy.oauth2-v1.baseUrl}/revoke</okta.revokeUrl>
+
+                <okta.redirectUri>${proxy.spa-v1.baseUrl}/callback</okta.redirectUri>
+                <okta.logoutRedirectUri>${proxy.spa-v1.baseUrl}/</okta.logoutRedirectUri>
+
+                <okta.domain>dev-296346.okta.com</okta.domain>
+                <okta.issuer>https://${okta.domain}/oauth2/default</okta.issuer>
+
+                <okta.api.token>00BjLeM0GZUdH7SLg0K4vwIg9rIKfox2bBjrLJWzgy</okta.api.token>
+                <target.okta.clientId>0oa5hesdrLCLjJGQP4x6</target.okta.clientId>
+                <target.okta.baseUrl>https://${okta.domain}/oauth2/default/v1</target.okta.baseUrl>
+                <target.okta.redirectUri>${proxy.oauth2-v1.baseUrl}/callback</target.okta.redirectUri>
+
+            </properties>
+        </profile>
+
+        <profile>
+            <id>oauth</id>
+            <modules>
+                <module>src/gateway/oauth2-v1</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>spa</id>
+            <modules>
+                <module>src/gateway/spa-v1</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>protected</id>
+            <modules>
+                <module>src/gateway/protected-endpoint-v1</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>all</id>
+            <modules>
+                <module>src/gateway/oauth2-v1</module>
+                <module>src/gateway/protected-endpoint-v1</module>
+                <module>src/gateway/spa-v1</module>
+            </modules>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echoproperties />
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
+</project>

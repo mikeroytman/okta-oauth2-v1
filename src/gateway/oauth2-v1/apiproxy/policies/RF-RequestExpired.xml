@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RaiseFault async="false" continueOnError="false" enabled="true" name="RF-RequestExpired">
+    <DisplayName>RF-RequestExpired</DisplayName>
+    <Properties/>
+    <FaultResponse>
+        <Set>
+            <StatusCode>401</StatusCode>
+            <Payload contentType="application/plain">{
+    "error": "Request expired."
+}</Payload>
+        </Set>
+    </FaultResponse>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</RaiseFault>

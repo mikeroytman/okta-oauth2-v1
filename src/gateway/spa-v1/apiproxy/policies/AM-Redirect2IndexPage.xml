@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AM-Redirect2IndexPage">
+    <DisplayName>AM-Redirect2IndexPage</DisplayName>
+    <Set>
+        <StatusCode>302</StatusCode>
+        <Headers>
+            <Header name="Location">{client.scheme}://{request.header.host}{proxy.basepath}/index.html</Header>
+        </Headers>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>

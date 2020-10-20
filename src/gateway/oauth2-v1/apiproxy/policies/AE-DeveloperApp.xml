@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AccessEntity async="false" continueOnError="false" enabled="true" name="AE-DeveloperApp">
+    <DisplayName>AE-DeveloperApp</DisplayName>
+    <Properties/>
+    <EntityIdentifier ref="developer.app.id" type="appid"/>
+    <EntityType value="app"/>
+</AccessEntity>

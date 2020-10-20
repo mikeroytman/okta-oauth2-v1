@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<LookupCache async="false" continueOnError="false" enabled="true" name="LC-LookupAuthorizeRequest">
+    <DisplayName>LC-LookupAuthorizeRequest</DisplayName>
+    <CacheKey>
+        <KeyFragment>authorize_request</KeyFragment>
+        <KeyFragment ref="flow.cache.key"/>
+    </CacheKey>
+    <Scope>Application</Scope>
+    <CacheLookupTimeoutInSeconds>10</CacheLookupTimeoutInSeconds>
+    <AssignTo>flow.authorize_request</AssignTo>
+</LookupCache>

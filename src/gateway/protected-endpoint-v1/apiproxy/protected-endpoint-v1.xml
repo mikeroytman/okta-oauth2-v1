@@ -1,0 +1,19 @@
+<APIProxy revision="1" name="angular-okta-signin-widget-spa">
+    <Basepaths>${proxy.path.prefix}/protected-endpoint-v1${proxy.path.suffix}</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <Description/>
+    <DisplayName>${proxy.name.prefix}protected-endpoint-v1${proxy.name.suffix}</DisplayName>
+    <LastModifiedAt>1602163355013</LastModifiedAt>
+    <LastModifiedBy>defaultUser</LastModifiedBy>
+    <Policies>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources/>
+    <Spec/>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

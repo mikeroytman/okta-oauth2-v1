@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="EV-ExtractStateFromHookRequest">
+    <DisplayName>EV-ExtractStateFromHookRequest</DisplayName>
+    <JSONPayload>
+        <Variable name="flow.idp.eventId">
+            <JSONPath>$.eventId</JSONPath>
+        </Variable>
+        <Variable name="flow.idp.eventTime">
+            <JSONPath>$.eventTime</JSONPath>
+        </Variable>
+        <Variable name="flow.idp.scope">
+            <JSONPath>$.data.context.protocol.request.scope</JSONPath>
+        </Variable>
+        <Variable name="flow.idp.state">
+            <JSONPath>$.data.context.protocol.request.state</JSONPath>
+        </Variable>
+        <Variable name="flow.cache.key">
+            <JSONPath>$.data.context.protocol.request.state</JSONPath>
+        </Variable>
+        <Variable name="flow.idp.redirect_uri">
+            <JSONPath>$.data.context.protocol.request.state</JSONPath>
+        </Variable>
+        <Variable name="flow.idp.response_mode">
+            <JSONPath>$.data.context.protocol.request.response_mode</JSONPath>
+        </Variable>
+        <Variable name="flow.idp.response_type">
+            <JSONPath>$.data.context.protocol.request.response_type</JSONPath>
+        </Variable>
+        <Variable name="flow.idp.client_id">
+            <JSONPath>$.data.context.protocol.request.client_id</JSONPath>
+        </Variable>
+    </JSONPayload>
+    <Source clearPayload="false">request</Source>
+</ExtractVariables>

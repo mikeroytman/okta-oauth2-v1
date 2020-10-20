@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="JS-BuildClientRedirect">
+    <DisplayName>JS-BuildClientRedirect</DisplayName>
+    <IncludeURL>jsc://url-parser.js</IncludeURL>
+    <ResourceURL>jsc://JS-BuildClientRedirect.js</ResourceURL>
+</Javascript>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="EV-TokenData">
+    <DisplayName>EV-TokenData</DisplayName>
+    <JSONPayload>
+        <Variable name="id_token">
+            <JSONPath>$.id_token</JSONPath>
+        </Variable>
+        <Variable name="access_token">
+            <JSONPath>$.access_token</JSONPath>
+        </Variable>
+        <Variable name="expires_in">
+            <JSONPath>$.expires_in</JSONPath>
+        </Variable>
+        <Variable name="scope">
+            <JSONPath>$.scope</JSONPath>
+        </Variable>
+    </JSONPayload>
+    <Source clearPayload="false">tokenResponse</Source>
+    <VariablePrefix>idp</VariablePrefix>
+</ExtractVariables>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 async="false" continueOnError="false" enabled="true" name="OAuth2-MintAuthorizationCode">
+    <DisplayName>OAuth2-MintAuthorizationCode</DisplayName>
+    <Operation>GenerateAuthorizationCode</Operation>
+    <ResponseType>request.queryparam.response_type</ResponseType>
+    <ClientId>request.queryparam.client_id</ClientId>
+    <RedirectUri>request.queryparam.redirect_uri</RedirectUri>
+    <!--<Scope>request.queryparam.scope</Scope>-->
+    <GenerateResponse enabled="false"/>
+    <Attributes>
+        <Attribute name="username" ref="request.queryparam.username">NA</Attribute>
+    </Attributes>
+</OAuthV2>

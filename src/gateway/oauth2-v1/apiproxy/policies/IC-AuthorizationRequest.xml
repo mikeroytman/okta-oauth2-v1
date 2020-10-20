@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<InvalidateCache async="false" continueOnError="false" enabled="true" name="IC-AuthorizationRequest">
+    <DisplayName>IC-AuthorizationRequest</DisplayName>
+    <CacheKey>
+        <KeyFragment>authorize_request</KeyFragment>
+        <KeyFragment ref="flow.cache.key"/>
+    </CacheKey>
+    <Scope>Application</Scope>
+    <PurgeChildEntries>true</PurgeChildEntries>
+</InvalidateCache>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PopulateCache async="false" continueOnError="false" enabled="true" name="PC-StoreRequestData">
+    <DisplayName>PC-StoreRequestData</DisplayName>
+    <CacheKey>
+        <KeyFragment>authorize_request</KeyFragment>
+        <KeyFragment ref="flow.cache.key"/>
+    </CacheKey>
+    <Scope>Application</Scope>
+    <ExpirySettings>
+        <TimeoutInSeconds>600</TimeoutInSeconds>
+    </ExpirySettings>
+    <Source>flow.authorize_request</Source>
+</PopulateCache>
