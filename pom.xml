@@ -58,6 +58,7 @@
                 <target.okta.clientId>0oa5hesdrLCLjJGQP4x6</target.okta.clientId>
                 <target.okta.baseUrl>https://${okta.domain}/oauth2/default/v1</target.okta.baseUrl>
                 <target.okta.redirectUri>${proxy.oauth2-v1.baseUrl}/callback</target.okta.redirectUri>
+                <apigee.verifyUrl>${proxy.oauth2-v1.baseUrl}/verify</apigee.verifyUrl>
 
             </properties>
         </profile>

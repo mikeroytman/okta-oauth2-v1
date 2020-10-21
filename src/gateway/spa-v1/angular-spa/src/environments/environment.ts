@@ -18,6 +18,7 @@ export const environment = {
         scopes: ['openid', 'profile', 'email'],
         responseType: ['code'],
         pkce: true,
+        verifyUrl: null,
         testing: {
             disableHttpsCheck: false //`${OKTA_TESTING_DISABLEHTTPSCHECK}`
         }

@@ -14,6 +14,7 @@ export const environment = {
     scopes: ['openid', 'profile', 'email'],
     responseType: ['code'],
     pkce: true,
+    verifyUrl: '${apigee.verifyUrl}',
     testing: {
       disableHttpsCheck: false
     },

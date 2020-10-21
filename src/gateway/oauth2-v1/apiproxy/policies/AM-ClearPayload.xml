@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AM-ClearPayload">
+    <DisplayName>AM-ClearPayload</DisplayName>
+    <Remove>
+        <Headers />
+    </Remove>
+    <Set>
+        <StatusCode>200</StatusCode>
+        <Headers>
+            <Header name="Content-Length">0</Header>
+        </Headers>
+        <Payload />
+    </Set>
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>

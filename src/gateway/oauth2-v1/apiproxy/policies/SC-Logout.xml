@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="SC-Logout">
+    <DisplayName>SC-Logout</DisplayName>
+    <Properties/>
+    <Request clearPayload="true" variable="logoutRequest">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>logoutResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>${target.okta.baseUrl}/logout?id_token_hint={idp.id_token}&amp;post_logout_redirect_uri=${okta.logoutUrl}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

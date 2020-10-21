@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="SC-RevokeAccessToken">
+    <DisplayName>SC-RevokeAccessToken</DisplayName>
+    <Properties/>
+    <Request clearPayload="true" variable="revokeTokenRequest">
+        <Set>
+            <Headers>
+                <Header name="Content-Type">application/x-www-form-urlencoded</Header>
+                <Header name="Authorization">Basic {encodeBase64('${target.okta.clientId}')}</Header>
+            </Headers>
+            <FormParams>
+                <FormParam name="token_type_hint">access_token</FormParam>
+                <FormParam name="token">{idp.access_token}</FormParam>
+            </FormParams>
+            <Verb>POST</Verb>
+        </Set>
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>revokeTokenResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>${target.okta.baseUrl}/revoke</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

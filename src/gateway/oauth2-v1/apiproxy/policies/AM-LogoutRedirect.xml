@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AM-LogoutRedirect">
+    <DisplayName>AM-LogoutRedirect</DisplayName>
+    <Remove>
+        <Headers />
+    </Remove>
+    <Set>
+        <StatusCode>302</StatusCode>
+        <Headers>
+            <Header name="Location">${okta.logoutRedirectUri}</Header>
+        </Headers>
+        <Payload />
+    </Set>
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>

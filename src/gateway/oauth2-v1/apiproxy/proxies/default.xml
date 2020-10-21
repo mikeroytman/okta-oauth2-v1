@@ -113,6 +113,12 @@
                     <Name>JWT-DecodeAccessToken</Name>
                 </Step>
                 <Step>
+                    <Name>SC-RevokeAccessToken</Name>
+                </Step>
+                <Step>
+                    <Name>SC-Logout</Name>
+                </Step>
+                <Step>
                     <Name>AM-SetRsaKeys</Name>
                 </Step>
                 <Step>
@@ -152,16 +158,38 @@
             <Response/>
             <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST")</Condition>
         </Flow>
+        <Flow name="VerifyAccessToken">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>OAuth2-VerifyAccessToken</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/verify") and (request.verb = "GET")</Condition>
+        </Flow>
         <Flow name="RevokeAccessToken">
             <Description/>
-            <Request/>
-            <Response/>
+            <Request>
+                <Step>
+                    <Name>OAuth2-RevokeAccessToken</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>AM-ClearPayload</Name>
+                </Step>
+            </Response>
             <Condition>(proxy.pathsuffix MatchesPath "/revoke") and (request.verb = "POST")</Condition>
         </Flow>
         <Flow name="Logout">
             <Description/>
             <Request/>
-            <Response/>
+            <Response>
+                <Step>
+                    <Name>AM-LogoutRedirect</Name>
+                </Step>
+            </Response>
             <Condition>(proxy.pathsuffix MatchesPath "/logout") and (request.verb = "GET")</Condition>
         </Flow>
         <Flow name="OktaInlineHook">
