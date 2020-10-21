@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AM-SetRsaKeys">
+    <DisplayName>AM-SetRsaKeys</DisplayName>
+    <AssignVariable>
+        <Name>private.privatekey</Name>
+        <Value><![CDATA[-----BEGIN RSA PRIVATE KEY-----
+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
+-----END RSA PRIVATE KEY-----
+]]></Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>debug.privateKey</Name>
+        <Ref>private.privatekey</Ref>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.publicKey</Name>
+        <Value><![CDATA[-----BEGIN PUBLIC KEY-----
+MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAx0bCbH8894Ir3UO9VfQj
+TZubGUyCuuDvRSOgKTGbx6/wXCeK6gcxjpJOyI/S3cDi8z6SKtt+W3ds6lu51cho
+sMzp8EODpWJcO9zojXvc9xlbKtcLznd61VnkKabcAIkgWLqNTMnEyjkmHOFLKYiX
+5fjTd1HQakHqbz+A3UNhwwp0/leUdKXCmFQnZTx01UNd4TazjyFF9DgNTr8EDWEC
+QCwydMxQJOnx/RBJbt8WqCjhAOLN2Tdc1qTJmtJHzBNWMVxZ/xMrkMAuqiAeNWsR
+kDmpsTqV3+pgNc58cRw+tleu1GVMGvOqZD85qfk9gWDxvDqeTvn4WLeFaCFpO6Ad
+lPrHaVIF3667Ur6YprEwV97gk7tkOfPWU8nGrw70s1TDwI9vZeWv2p4El66bRuP2
+MvcQDByxngNOojzuZXAZzTYrS6IrI1ykZbP+Gk5ttN5omm8+LXmBUMx93vVeKDD7
+MlOG5cbGLqdv6pYVJOjMfhrqmTC3aSNJhcCqYOzlzTKTS0FZlSlBqfJa8yIELFJ8
+yvP0+7LbZurVYCHA8ofIrVNVlosxchHCrlSDUsrDcP6joOl9sv4CMi4HluQfInAJ
+5UdeZdYyQWh0xRN8DeYVSfT2GMIjJ2ZqsATnrIjKveBwbvsB1zpyhRVIfPFjWKlK
+dygQKezvxgGf0+hU7pw3g+ECAwEAAQ==
+-----END PUBLIC KEY-----
+]]></Value>
+    </AssignVariable>
+</AssignMessage>

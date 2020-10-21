@@ -113,10 +113,22 @@
                     <Name>JWT-DecodeAccessToken</Name>
                 </Step>
                 <Step>
-                    <Name>JS-PrepareTokensClaims</Name>
+                    <Name>AM-SetRsaKeys</Name>
                 </Step>
                 <Step>
                     <Name>JS-AdjustExpiresInValue</Name>
+                </Step>
+                <Step>
+                    <Name>JS-PrepareAccessTokenClaims</Name>
+                </Step>
+                <Step>
+                    <Name>JWT-GenerateJWT</Name>
+                </Step>
+                <Step>
+                    <Name>JS-PrepareIdTokenClaims</Name>
+                </Step>
+                <Step>
+                    <Name>JWT-GenerateJWT</Name>
                 </Step>
                 <Step>
                     <Name>VAK-ClientId</Name>

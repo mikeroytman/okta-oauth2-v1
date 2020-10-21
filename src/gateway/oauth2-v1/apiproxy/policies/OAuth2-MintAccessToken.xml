@@ -13,7 +13,10 @@
         <GrantType>client_credentials</GrantType>
     </SupportedGrantTypes>
     <GenerateResponse enabled="true"/>
+    <ExternalAccessToken>flow.access_token</ExternalAccessToken>
+    <ExternalAuthorization>true</ExternalAuthorization>
+    <StoreToken>true</StoreToken>
     <Attributes>
-        <Attribute name="id_token" ref="idp.id_token" />
+        <Attribute name="id_token" ref="flow.jwt" />
     </Attributes>
 </OAuthV2>

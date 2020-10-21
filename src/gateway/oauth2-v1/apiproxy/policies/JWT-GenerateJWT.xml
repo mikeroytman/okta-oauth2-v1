@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GenerateJWT async="false" continueOnError="false" enabled="true" name="JWT-GenerateJWT">
+    <DisplayName>JWT-GenerateJWT.xml</DisplayName>
+    <Algorithm>RS256</Algorithm>
+    <PrivateKey>
+        <Id ref="flow.kid"/>
+        <Value ref="private.privatekey"/>
+    </PrivateKey>
+    <Id ref="flow.jti" />
+    <Subject ref="flow.sub"/>
+    <Issuer ref="flow.iss"/>
+    <Audience ref="flow.aud"/>
+    <ExpiresIn>3600m</ExpiresIn>
+    <AdditionalClaims ref="flow.additionalClaims"/>
+    <OutputVariable>flow.jwt</OutputVariable>
+</GenerateJWT>
