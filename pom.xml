@@ -41,8 +41,7 @@
                 <proxy.protected-endpoint-v1.baseUrl>https://${northbound.domain}${proxy.path.prefix}/protected-endpoint/v1${proxy.path.suffix}</proxy.protected-endpoint-v1.baseUrl>
 
 
-                <!--<okta.clientId>T1AzMaG3bLQcrZ4sAHWiX3mvVanEVCVf</okta.clientId>-->
-                <okta.clientId>YFfyQtptGa0vJLJuJVFucRcoVzt9kbsL</okta.clientId>
+                <okta.clientId>T1AzMaG3bLQcrZ4sAHWiX3mvVanEVCVf</okta.clientId>
                 <okta.baseUrl>${proxy.oauth2-v1.baseUrl}</okta.baseUrl>
                 <okta.tokenUrl>${proxy.oauth2-v1.baseUrl}/token</okta.tokenUrl>
                 <okta.authorizeUrl>${proxy.oauth2-v1.baseUrl}/authorize</okta.authorizeUrl>

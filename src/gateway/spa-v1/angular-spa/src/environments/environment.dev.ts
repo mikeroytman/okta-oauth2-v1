@@ -17,7 +17,7 @@ export const environment = {
     testing: {
       disableHttpsCheck: false
     },
-    ignoreSignature:false
+    ignoreSignature:true
   },
   baseURL: '${proxy.protected-endpoint-v1.baseUrl}'
 };
