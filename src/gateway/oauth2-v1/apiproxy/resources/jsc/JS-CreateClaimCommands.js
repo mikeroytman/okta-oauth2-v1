@@ -1,7 +1,20 @@
 'use strict';
-/* globals context */
+/* globals context print */
 
 var authorizeRequest = JSON.parse(context.getVariable('flow.authorize_request'));
+
+var userGroups = context.getVariable('flow.idp.user.groups')
+    ? JSON.parse(context.getVariable('userGroupsResponse.content'))
+    : [];
+
+var commands = {
+    'commands': []
+};
+var groups = [];
+userGroups.forEach(function (userGroup) {
+    print('user group name: '.concat(userGroup.profile.name));
+    groups.push(userGroup.profile.name);
+});
 
 var commands = {
     "commands": [
@@ -9,19 +22,9 @@ var commands = {
             "type": "com.okta.identity.patch",
             "value": [
                 {
-                    "op": "replace",
-                    "path": "/claims/aud",
-                    "value": authorizeRequest.client.client_id
-                }
-            ]
-        },
-        {
-            "type": "com.okta.identity.patch",
-            "value": [
-                {
                     "op": "add",
-                    "path": "/claims/alias",
-                    "value": "Mariano Delgado"
+                    "path": "/claims/assign_to",
+                    "value": groups.join(', ')
                 }
             ]
         },
@@ -30,38 +33,14 @@ var commands = {
             "value": [
                 {
                     "op": "add",
-                    "path": "/claims/alias",
-                    "value": "Mariano Delgado"
+                    "path": "/claims/assign_to",
+                    "value": groups.join(', ')
                 }
             ]
         }
+
     ]
 };
 
-
-context.setVariable('response.content', JSON.stringify(commands, null, 4));
-context.setVariable('response.content', JSON.stringify({
-    "commands": [
-        {
-            "type": "com.okta.identity.patch",
-            "value": [
-                {
-                    "op": "replace",
-                    "path": "/claims/aud",
-                    "value": authorizeRequest.client.client_id + ''
-                }
-            ]
-        },
-        {
-            "type": "com.okta.access.patch",
-            "value": [
-                {
-                    "op": "add",
-                    "path": "/claims/external_guid",
-                    "value": "F0384685-F87D-474B-848D-2058AC5655A7"
-                }
-            ]
-        }
-    ]
-}, null, 4));
 context.setVariable('response.header.Content-Type', 'application/json');
+context.setVariable('response.content', JSON.stringify(commands, null, 4));

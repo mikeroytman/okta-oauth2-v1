@@ -199,10 +199,20 @@
                     <Name>JS-Debug</Name>
                 </Step>
                 <Step>
-                    <Name>EV-ExtractStateFromHookRequest</Name>
+                    <Name>EV-InlineHookData</Name>
                 </Step>
                 <Step>
                     <Name>LC-LookupAuthorizeRequest</Name>
+                </Step>
+                <Step>
+                    <Name>JS-ExtractUrls</Name>
+                </Step>
+                <Step>
+                    <Name>AM-ReqeustUserGroups</Name>
+                </Step>
+                <Step>
+                    <Name>SC-RequestUserGroups</Name>
+                    <Condition>flow.idp.user.groups != null</Condition>
                 </Step>
             </Request>
             <Response>

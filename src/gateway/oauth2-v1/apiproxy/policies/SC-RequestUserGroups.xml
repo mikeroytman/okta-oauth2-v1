@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="SC-RequestUserGroups">
+    <DisplayName>SC-RequestUserGroups</DisplayName>
+    <Properties/>
+    <Request clearPayload="true" variable="userGroupsRequest">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>userGroupsResponse</Response>
+    <HTTPTargetConnection>
+        <!--<URL>https://{groupsUrl}</URL>-->
+        <URL>https://${okta.domain}/api/v1/users/{flow.idp.user.id}/groups</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

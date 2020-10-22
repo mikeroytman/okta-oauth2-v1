@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ExtractVariables async="false" continueOnError="false" enabled="true" name="EV-ExtractStateFromHookRequest">
-    <DisplayName>EV-ExtractStateFromHookRequest</DisplayName>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="EV-InlineHookData">
+    <DisplayName>EV-InlineHookData</DisplayName>
     <JSONPayload>
         <Variable name="flow.idp.eventId">
             <JSONPath>$.eventId</JSONPath>
@@ -8,13 +8,13 @@
         <Variable name="flow.idp.eventTime">
             <JSONPath>$.eventTime</JSONPath>
         </Variable>
+        <Variable name="flow.cache.key">
+            <JSONPath>$.data.context.protocol.request.state</JSONPath>
+        </Variable>
         <Variable name="flow.idp.scope">
             <JSONPath>$.data.context.protocol.request.scope</JSONPath>
         </Variable>
         <Variable name="flow.idp.state">
-            <JSONPath>$.data.context.protocol.request.state</JSONPath>
-        </Variable>
-        <Variable name="flow.cache.key">
             <JSONPath>$.data.context.protocol.request.state</JSONPath>
         </Variable>
         <Variable name="flow.idp.redirect_uri">
@@ -28,6 +28,12 @@
         </Variable>
         <Variable name="flow.idp.client_id">
             <JSONPath>$.data.context.protocol.request.client_id</JSONPath>
+        </Variable>
+        <Variable name="flow.idp.user.id">
+            <JSONPath>$.data.context.user.id</JSONPath>
+        </Variable>
+        <Variable name="flow.idp.user.groups">
+            <JSONPath>$.data.context.user._links.groups.href</JSONPath>
         </Variable>
     </JSONPayload>
     <Source clearPayload="false">request</Source>
