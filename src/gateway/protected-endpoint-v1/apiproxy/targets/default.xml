@@ -11,6 +11,6 @@
         <Response/>
     </PostFlow>
     <HTTPTargetConnection>
-        <URL>https://httbin.org/anything</URL>
+        <URL>https://httpbin.org/anything</URL>
     </HTTPTargetConnection>
 </TargetEndpoint>

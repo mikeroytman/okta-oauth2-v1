@@ -1,9 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<AssignMessage async="false" continueOnError="false" enabled="true" name="AM-SetRsaKeys">
-    <DisplayName>AM-SetRsaKeys</DisplayName>
-    <AssignVariable>
-        <Name>private.privatekey</Name>
-        <Value><![CDATA[-----BEGIN RSA PRIVATE KEY-----
+-----BEGIN RSA PRIVATE KEY-----
 MIIJKAIBAAKCAgEAx0bCbH8894Ir3UO9VfQjTZubGUyCuuDvRSOgKTGbx6/wXCeK
 6gcxjpJOyI/S3cDi8z6SKtt+W3ds6lu51chosMzp8EODpWJcO9zojXvc9xlbKtcL
 znd61VnkKabcAIkgWLqNTMnEyjkmHOFLKYiX5fjTd1HQakHqbz+A3UNhwwp0/leU
@@ -54,28 +49,3 @@ DmOUvryZSMM1CzAb1SgfYYfpLButpfymN0ARC5J2+DhEpywjUzd0aMuz4MxE7h+k
 ScnHXu2tUn8bDhYmFkzzPl0kQfr8gU6Z+ogE60OHyRwG9BZ28gfYwwchaSU2WGbT
 w4cWwXCOJwPJVaOCJoihvKmA+eldtI4ez4n9pPZ36y8MJtGKNKgTUjBlYE8=
 -----END RSA PRIVATE KEY-----
-]]></Value>
-    </AssignVariable>
-    <AssignVariable>
-        <Name>debug.privateKey</Name>
-        <Ref>private.privatekey</Ref>
-    </AssignVariable>
-    <AssignVariable>
-        <Name>flow.publicKey</Name>
-        <Value><![CDATA[-----BEGIN PUBLIC KEY-----
-MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAx0bCbH8894Ir3UO9VfQj
-TZubGUyCuuDvRSOgKTGbx6/wXCeK6gcxjpJOyI/S3cDi8z6SKtt+W3ds6lu51cho
-sMzp8EODpWJcO9zojXvc9xlbKtcLznd61VnkKabcAIkgWLqNTMnEyjkmHOFLKYiX
-5fjTd1HQakHqbz+A3UNhwwp0/leUdKXCmFQnZTx01UNd4TazjyFF9DgNTr8EDWEC
-QCwydMxQJOnx/RBJbt8WqCjhAOLN2Tdc1qTJmtJHzBNWMVxZ/xMrkMAuqiAeNWsR
-kDmpsTqV3+pgNc58cRw+tleu1GVMGvOqZD85qfk9gWDxvDqeTvn4WLeFaCFpO6Ad
-lPrHaVIF3667Ur6YprEwV97gk7tkOfPWU8nGrw70s1TDwI9vZeWv2p4El66bRuP2
-MvcQDByxngNOojzuZXAZzTYrS6IrI1ykZbP+Gk5ttN5omm8+LXmBUMx93vVeKDD7
-MlOG5cbGLqdv6pYVJOjMfhrqmTC3aSNJhcCqYOzlzTKTS0FZlSlBqfJa8yIELFJ8
-yvP0+7LbZurVYCHA8ofIrVNVlosxchHCrlSDUsrDcP6joOl9sv4CMi4HluQfInAJ
-5UdeZdYyQWh0xRN8DeYVSfT2GMIjJ2ZqsATnrIjKveBwbvsB1zpyhRVIfPFjWKlK
-dygQKezvxgGf0+hU7pw3g+ECAwEAAQ==
------END PUBLIC KEY-----
-]]></Value>
-    </AssignVariable>
-</AssignMessage>

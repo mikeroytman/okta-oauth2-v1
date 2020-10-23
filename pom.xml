@@ -64,6 +64,50 @@
         </profile>
 
         <profile>
+            <id>bcbsa-nonprod</id>
+            <properties>
+                <org>bcbsa-nonprod</org>
+                <apigee.org>bcbsa-nonprod</apigee.org>
+                <apigee.env>dev</apigee.env>
+                <apigee.bearer>${env.ACCESS_TOKEN}</apigee.bearer> <!-- optional: oauth -->
+                <apigee.authtype>oauth</apigee.authtype> <!-- optional: oauth|basic(default) -->
+                <apigee.tokenurl>https://bcbsa.login.apigee.com</apigee.tokenurl>
+
+                <northbound.domain>api-dev.nonprod.bcbs.com</northbound.domain>
+
+                <proxy.name.prefix>oktademo-</proxy.name.prefix>
+                <proxy.path.prefix>/oktademo</proxy.path.prefix>
+                <proxy.name.suffix>-${user.name}</proxy.name.suffix>
+                <proxy.path.suffix>-${user.name}</proxy.path.suffix>
+
+                <proxy.oauth2-v1.baseUrl>https://${northbound.domain}${proxy.path.prefix}/oauth2/v1${proxy.path.suffix}</proxy.oauth2-v1.baseUrl>
+                <proxy.spa-v1.baseUrl>https://${northbound.domain}${proxy.path.prefix}/spa${proxy.path.suffix}</proxy.spa-v1.baseUrl>
+                <proxy.protected-endpoint-v1.baseUrl>https://${northbound.domain}${proxy.path.prefix}/protected-endpoint/v1${proxy.path.suffix}</proxy.protected-endpoint-v1.baseUrl>
+
+
+                <okta.clientId>T1AzMaG3bLQcrZ4sAHWiX3mvVanEVCVf</okta.clientId>
+                <okta.baseUrl>${proxy.oauth2-v1.baseUrl}</okta.baseUrl>
+                <okta.tokenUrl>${proxy.oauth2-v1.baseUrl}/token</okta.tokenUrl>
+                <okta.authorizeUrl>${proxy.oauth2-v1.baseUrl}/authorize</okta.authorizeUrl>
+                <okta.logoutUrl>${proxy.oauth2-v1.baseUrl}/logout</okta.logoutUrl>
+                <okta.revokeUrl>${proxy.oauth2-v1.baseUrl}/revoke</okta.revokeUrl>
+
+                <okta.redirectUri>${proxy.spa-v1.baseUrl}/callback</okta.redirectUri>
+                <okta.logoutRedirectUri>${proxy.spa-v1.baseUrl}/</okta.logoutRedirectUri>
+
+                <okta.domain>dev-296346.okta.com</okta.domain>
+                <okta.issuer>https://${okta.domain}/oauth2/default</okta.issuer>
+
+                <okta.api.token>00BjLeM0GZUdH7SLg0K4vwIg9rIKfox2bBjrLJWzgy</okta.api.token>
+                <target.okta.clientId>0oa5hesdrLCLjJGQP4x6</target.okta.clientId>
+                <target.okta.baseUrl>https://${okta.domain}/oauth2/default/v1</target.okta.baseUrl>
+                <target.okta.redirectUri>${proxy.oauth2-v1.baseUrl}/callback</target.okta.redirectUri>
+                <apigee.verifyUrl>${proxy.oauth2-v1.baseUrl}/verify</apigee.verifyUrl>
+
+            </properties>
+        </profile>
+
+        <profile>
             <id>oauth</id>
             <modules>
                 <module>src/gateway/oauth2-v1</module>
@@ -91,29 +135,129 @@
                 <module>src/gateway/spa-v1</module>
             </modules>
         </profile>
+        <profile>
+            <id>configs</id>
+            <properties>
+                <apigee.config.options>sync</apigee.config.options>
+                <apigee.config.dir>${project.build.directory}/edge</apigee.config.dir>
+                <apigee.config.exportDir>${project.build.directory}</apigee.config.exportDir>
+            </properties>
+
+            <build>
+                <plugins>
+
+
+
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>2.6</version>
+                        <executions>
+                            <execution>
+                                <id>copy-configs</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <overwrite>true</overwrite>
+                                    <encoding>UTF-8</encoding>
+                                    <outputDirectory>${project.basedir}/target/edge</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.basedir}/edge</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <executions>
+
+                            <execution>
+                                <id>install-node-&amp;-npm</id>
+                                <goals>
+                                    <goal>install-node-and-npm</goal>
+                                </goals>
+                                <configuration>
+                                    <nodeVersion>v12.18.3</nodeVersion>
+                                    <npmVersion>6.14.6</npmVersion>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>build-kmvs</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>run-script build</arguments>
+                                </configuration>
+                                <phase>process-resources</phase>
+
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <workingDirectory>${project.build.directory}/edge</workingDirectory>
+                            <installDirectory>${project.basedir}/.node</installDirectory>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.apigee.edge.config</groupId>
+                        <artifactId>apigee-config-maven-plugin</artifactId>
+                        <version>1.4.3</version>
+                        <executions>
+                            <execution>
+                                <id>create-config-kvms</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>kvms</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>create-config-apiproduct</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>apiproducts</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>create-config-developer</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>developers</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>create-config-app</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>apps</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>import-keys</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>importKeys</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>export-keys</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>exportAppKeys</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
     </profiles>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <tasks>
-                                <echoproperties />
-                            </tasks>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-    
 </project>

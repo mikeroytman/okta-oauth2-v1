@@ -1,0 +1,9 @@
+[
+    {
+        "attributes": [],
+        "email": "${proxy.name.prefix}oauth2-v1-developer${proxy.name.suffix}@example.com",
+        "firstName": "oauth2-v1-developer",
+        "lastName": "demo",
+        "userName": "${proxy.name.prefix}oauth2-v1-developer${proxy.name.suffix}"
+    }
+]

@@ -1,0 +1,12 @@
+{
+    "${proxy.name.prefix}oauth2-v1-developer${proxy.name.suffix}@example.com": [
+        {
+            "apiProducts": [
+                "${proxy.name.prefix}oauth2-v1-product${proxy.name.suffix}"
+            ],
+            "callbackUrl": "${okta.redirectUri}",
+            "name": "${proxy.name.prefix}oauth2-v1-dev-app${proxy.name.suffix}",
+            "scopes": []
+        }
+    ]
+}

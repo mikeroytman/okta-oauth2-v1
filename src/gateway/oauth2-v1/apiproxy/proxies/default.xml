@@ -9,6 +9,9 @@
             <Description></Description>
             <Request>
                 <Step>
+                    <Name>KVM-ProxyConfigs</Name>
+                </Step>
+                <Step>
                     <Name>AM-SetApiKeyFromClientId</Name>
                 </Step>
                 <Step>
@@ -42,6 +45,9 @@
             <Description></Description>
             <Request>
                 <Step>
+                    <Name>KVM-ProxyConfigs</Name>
+                </Step>
+                <Step>
                     <Name>AM-SetCacheKeyFromState</Name>
                 </Step>
                 <Step>
@@ -50,6 +56,10 @@
                 </Step>
                 <Step>
                     <Name>LC-LookupAuthorizeRequest</Name>
+                </Step>
+                <Step>
+                    <Name>LC-LookupAuthorizeRequest</Name>
+                    <Condition>(flow.authorize_request == null)</Condition>
                 </Step>
                 <Step>
                     <Name>RF-RequestExpired</Name>
@@ -82,10 +92,17 @@
             <Description/>
             <Request>
                 <Step>
+                    <Name>KVM-ProxyConfigs</Name>
+                </Step>
+                <Step>
                     <Name>AM-SetCacheKeyFromCode</Name>
                 </Step>
                 <Step>
                     <Name>LC-LookupAuthorizeRequest</Name>
+                </Step>
+                <Step>
+                    <Name>LC-LookupAuthorizeRequest</Name>
+                    <Condition>(flow.authorize_request == null)</Condition>
                 </Step>
                 <Step>
                     <Name>RF-RequestExpired</Name>
@@ -117,9 +134,6 @@
                 </Step>
                 <Step>
                     <Name>SC-Logout</Name>
-                </Step>
-                <Step>
-                    <Name>AM-SetRsaKeys</Name>
                 </Step>
                 <Step>
                     <Name>JS-AdjustExpiresInValue</Name>
@@ -162,6 +176,9 @@
             <Description/>
             <Request>
                 <Step>
+                    <Name>KVM-ProxyConfigs</Name>
+                </Step>
+                <Step>
                     <Name>OAuth2-VerifyAccessToken</Name>
                 </Step>
             </Request>
@@ -171,6 +188,9 @@
         <Flow name="RevokeAccessToken">
             <Description/>
             <Request>
+                <Step>
+                    <Name>KVM-ProxyConfigs</Name>
+                </Step>
                 <Step>
                     <Name>OAuth2-RevokeAccessToken</Name>
                 </Step>
@@ -187,6 +207,9 @@
             <Request/>
             <Response>
                 <Step>
+                    <Name>KVM-ProxyConfigs</Name>
+                </Step>
+                <Step>
                     <Name>AM-LogoutRedirect</Name>
                 </Step>
             </Response>
@@ -199,16 +222,23 @@
                     <Name>JS-Debug</Name>
                 </Step>
                 <Step>
+                    <Name>KVM-ProxyConfigs</Name>
+                </Step>
+                <Step>
                     <Name>EV-InlineHookData</Name>
                 </Step>
                 <Step>
                     <Name>LC-LookupAuthorizeRequest</Name>
                 </Step>
                 <Step>
+                    <Name>LC-LookupAuthorizeRequest</Name>
+                    <Condition>(flow.authorize_request == null)</Condition>
+                </Step>
+                <Step>
                     <Name>JS-ExtractUrls</Name>
                 </Step>
                 <Step>
-                    <Name>AM-ReqeustUserGroups</Name>
+                    <Name>AM-RequestUserGroups</Name>
                 </Step>
                 <Step>
                     <Name>SC-RequestUserGroups</Name>
@@ -235,18 +265,4 @@
         <VirtualHost>secure</VirtualHost>
     </HTTPProxyConnection>
     <RouteRule name="noroute" />
-        <!--<Condition>(proxy.pathsuffix MatchesPath "/oktainlinehook") and (request.verb = "POST")</Condition>-->
-    <!--</RouteRule>-->
-    <!--<RouteRule name="inlinehook">-->
-        <!--<Condition>(proxy.pathsuffix MatchesPath "/oktainlinehook") and (request.verb = "POST")</Condition>-->
-    <!--</RouteRule>-->
-    <!--<RouteRule name="authorize">-->
-        <!--<Condition>(proxy.pathsuffix MatchesPath "/authorize") and (request.verb = "GET")</Condition>-->
-    <!--</RouteRule>-->
-    <!--<RouteRule name="okta-callback">-->
-        <!--<Condition>(proxy.pathsuffix MatchesPath "/callback") and (request.verb = "GET")</Condition>-->
-    <!--</RouteRule>-->
-    <!--<RouteRule name="default">-->
-        <!--<TargetEndpoint>default</TargetEndpoint>-->
-    <!--</RouteRule>-->
 </ProxyEndpoint>

@@ -1,0 +1,12 @@
+{
+    "${proxy.name.prefix}oauth2-v1-developer${proxy.name.suffix}@example.com": [
+        {
+	        "apiProducts": [
+	            "${proxy.name.prefix}oauth2-v1-product${proxy.name.suffix}"
+	        ],
+	        "name": "${proxy.name.prefix}oauth2-v1-dev-app${proxy.name.suffix}",
+	        "consumerKey": "${okta.clientId}",
+	        "consumerSecret": "not-used-in-client-not-mean-for-production-either"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+[
+    {
+        "name": "${proxy.name.prefix}oauth2-v1-config${proxy.name.suffix}",
+        "encrypted": true,
+        "entry":[
+            {
+                "name": "privateKey",
+                "value": ""
+            },
+            {
+                "name": "publicKey",
+                "value": ""
+            },
+            {
+                "name": "oktaApiToken",
+                "value": "${okta.api.token}"
+            }
+        ]
+    }
+]

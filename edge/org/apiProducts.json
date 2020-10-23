@@ -1,0 +1,22 @@
+[
+    {
+        "name": "${proxy.name.prefix}oauth2-v1-product${proxy.name.suffix}",
+        "displayName": "${proxy.name.prefix}oauth2-v1-product${proxy.name.suffix}",
+        "description": "Product to enable proxies ${proxy.name.prefix}oauth2-v1${proxy.name.suffix}, ${proxy.name.prefix}spa-v1${proxy.name.suffix}, and ${proxy.name.prefix}protected-endpoint-v1${proxy.name.suffix}",
+        "apiResources": [
+            "/**",
+            "/"
+        ],
+        "approvalType": "auto",
+        "attributes": [
+        ],
+        "environments": [
+            "${apigee.env}"
+        ],
+        "proxies": [
+            "${proxy.name.prefix}oauth2-v1${proxy.name.suffix}",
+            "${proxy.name.prefix}protected-endpoint-v1${proxy.name.suffix}"
+        ],
+        "scopes": []
+    }
+]

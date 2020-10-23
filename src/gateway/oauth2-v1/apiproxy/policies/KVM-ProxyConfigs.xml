@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="KVM-ProxyConfigs" mapIdentifier="${proxy.name.prefix}oauth2-v1-config${proxy.name.suffix}">
+    <DisplayName>KVM-ProxyConfigs</DisplayName>
+    <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
+    <Get assignTo="private.privatekey" index="1">
+        <Key>
+            <Parameter>privateKey</Parameter>
+        </Key>
+    </Get>
+    <Get assignTo="private.publicKey" index="1">
+        <Key>
+            <Parameter>publicKey</Parameter>
+        </Key>
+    </Get>
+    <Get assignTo="private.oktaApiToken" index="1">
+        <Key>
+            <Parameter>oktaApiToken</Parameter>
+        </Key>
+    </Get>
+    <Scope>environment</Scope>
+</KeyValueMapOperations>
