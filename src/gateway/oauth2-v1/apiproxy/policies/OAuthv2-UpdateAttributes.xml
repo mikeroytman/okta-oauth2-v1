@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SetOAuthV2Info async="false" continueOnError="false" enabled="true" name="OAuthv2-UpdateAttributes">
+    <DisplayName>OAuthv2-UpdateAttributes</DisplayName>
+    <AccessToken ref="flow.access_token"/>
+    <Attributes>
+        <Attribute name="okta.id_token" ref="idp.id_token" />
+        <Attribute name="okta.access_token" ref="idp.access_token" />
+        <Attribute name="apigee.jwt.id_token" ref="flow.id_token" />
+        <Attribute name="apigee.jwt.access_token" ref="flow.jwt" />
+    </Attributes>
+</SetOAuthV2Info>

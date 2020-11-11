@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="EV-ExtractJwtAccessToken">
+    <DisplayName>EV-ExtractJwtAccessToken.xml</DisplayName>
+    <Header name="Authorization">
+        <Pattern>Bearer {flow.request.access_token}</Pattern>
+    </Header>
+    <Source clearPayload="false">request</Source>
+</ExtractVariables>

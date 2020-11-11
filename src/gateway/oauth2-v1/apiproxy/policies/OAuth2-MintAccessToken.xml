@@ -2,21 +2,21 @@
 <OAuthV2 name="OAuth2-MintAccessToken">
     <DisplayName>OAuth2-MintAccessToken</DisplayName>
     <Operation>GenerateAccessToken</Operation>
-    <ExpiresIn>3600000</ExpiresIn> <!-- 3600000ms = 1 hour -->
-    <ClientId>request.formparam.client_id</ClientId>
+    <ExpiresIn ref="flow.expires_in">3600000</ExpiresIn> <!-- 3600000ms = 1 hour -->
+    <!--<ClientId>request.formparam.client_id</ClientId>-->
     <RedirectUri>request.formparam.redirect_uri</RedirectUri>
     <Scope>request.formparam.scope</Scope>
     <GrantType>request.formparam.grant_type</GrantType>
     <Code>request.formparam.code</Code>
     <SupportedGrantTypes>
         <GrantType>authorization_code</GrantType>
-        <GrantType>client_credentials</GrantType>
+        <!--<GrantType>client_credentials</GrantType>-->
     </SupportedGrantTypes>
     <GenerateResponse enabled="true"/>
-    <ExternalAccessToken>flow.access_token</ExternalAccessToken>
-    <ExternalAuthorization>true</ExternalAuthorization>
-    <StoreToken>true</StoreToken>
-    <Attributes>
-        <Attribute name="id_token" ref="flow.jwt" />
-    </Attributes>
+    <!--<ExternalAccessToken>flow.jwt</ExternalAccessToken>-->
+    <!--<ExternalAuthorization>true</ExternalAuthorization>-->
+    <!--<StoreToken>true</StoreToken>-->
+    <!--<Attributes>-->
+        <!--<Attribute name="id_token" ref="flow.id_token" />-->
+    <!--</Attributes>-->
 </OAuthV2>

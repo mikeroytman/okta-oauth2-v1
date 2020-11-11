@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<VerifyJWT async="false" continueOnError="false" enabled="true" name="JWT-VerifyAccessToken">
+    <DisplayName>JWT-VerifyAccessToken</DisplayName>
+    <Algorithm>RS256</Algorithm>
+    <Source>flow.request.access_token</Source>
+    <PublicKey>
+        <Value ref="private.publicKey"/>
+    </PublicKey>
+    <!--<Subject>subject-subject</Subject>-->
+    <Issuer>${okta.issuer}</Issuer>
+    <Audience>${jwt.aud}</Audience>
+</VerifyJWT>

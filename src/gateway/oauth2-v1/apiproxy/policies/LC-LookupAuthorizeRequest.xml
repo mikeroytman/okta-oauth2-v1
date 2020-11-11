@@ -5,7 +5,8 @@
         <KeyFragment>authorize_request</KeyFragment>
         <KeyFragment ref="flow.cache.key"/>
     </CacheKey>
-    <Scope>Application</Scope>
+    <Scope>Global</Scope>
+    <CacheResource>oauth2-v1${proxy.name.suffix}</CacheResource>
     <CacheLookupTimeoutInSeconds>10</CacheLookupTimeoutInSeconds>
     <AssignTo>flow.authorize_request</AssignTo>
 </LookupCache>

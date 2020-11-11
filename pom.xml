@@ -84,7 +84,6 @@
                 <proxy.spa-v1.baseUrl>https://${northbound.domain}${proxy.path.prefix}/spa${proxy.path.suffix}</proxy.spa-v1.baseUrl>
                 <proxy.protected-endpoint-v1.baseUrl>https://${northbound.domain}${proxy.path.prefix}/protected-endpoint/v1${proxy.path.suffix}</proxy.protected-endpoint-v1.baseUrl>
 
-
                 <okta.clientId>T1AzMaG3bLQcrZ4sAHWiX3mvVanEVCVf</okta.clientId>
                 <okta.baseUrl>${proxy.oauth2-v1.baseUrl}</okta.baseUrl>
                 <okta.tokenUrl>${proxy.oauth2-v1.baseUrl}/token</okta.tokenUrl>
@@ -98,12 +97,13 @@
                 <okta.domain>dev-296346.okta.com</okta.domain>
                 <okta.issuer>https://${okta.domain}/oauth2/default</okta.issuer>
 
+                <jwt.aud>urn://iarellano-eval-test.apigee.net/</jwt.aud>
+
                 <okta.api.token>00BjLeM0GZUdH7SLg0K4vwIg9rIKfox2bBjrLJWzgy</okta.api.token>
                 <target.okta.clientId>0oa5hesdrLCLjJGQP4x6</target.okta.clientId>
                 <target.okta.baseUrl>https://${okta.domain}/oauth2/default/v1</target.okta.baseUrl>
                 <target.okta.redirectUri>${proxy.oauth2-v1.baseUrl}/callback</target.okta.redirectUri>
                 <apigee.verifyUrl>${proxy.oauth2-v1.baseUrl}/verify</apigee.verifyUrl>
-
             </properties>
         </profile>
 
@@ -127,6 +127,7 @@
                 <module>src/gateway/protected-endpoint-v1</module>
             </modules>
         </profile>
+
         <profile>
             <id>all</id>
             <modules>
@@ -135,6 +136,7 @@
                 <module>src/gateway/spa-v1</module>
             </modules>
         </profile>
+
         <profile>
             <id>configs</id>
             <properties>
@@ -142,12 +144,8 @@
                 <apigee.config.dir>${project.build.directory}/edge</apigee.config.dir>
                 <apigee.config.exportDir>${project.build.directory}</apigee.config.exportDir>
             </properties>
-
             <build>
                 <plugins>
-
-
-
                     <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
                         <version>2.6</version>
@@ -172,6 +170,7 @@
                             </execution>
                         </executions>
                     </plugin>
+
                     <plugin>
                         <groupId>com.github.eirslett</groupId>
                         <artifactId>frontend-maven-plugin</artifactId>
@@ -205,6 +204,7 @@
                             <installDirectory>${project.basedir}/.node</installDirectory>
                         </configuration>
                     </plugin>
+
                     <plugin>
                         <groupId>com.apigee.edge.config</groupId>
                         <artifactId>apigee-config-maven-plugin</artifactId>
@@ -257,7 +257,5 @@
                 </plugins>
             </build>
         </profile>
-
     </profiles>
-
 </project>

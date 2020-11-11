@@ -48,6 +48,30 @@
                                     <includes>
                                         <include>apiproxy/**</include>
                                     </includes>
+                                    <excludes>
+                                        <exclude>apiproxy/resources/java/**</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-jars</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <encoding>UTF-8</encoding>
+                            <outputDirectory>${project.basedir}/target</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}</directory>
+                                    <filtering>false</filtering>
+                                    <includes>
+                                        <include>apiproxy/resources/java/**</include>
+                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>

@@ -3,6 +3,6 @@
     <DisplayName>OAuth2-RevokeAccessToken</DisplayName>
     <Operation>InvalidateToken</Operation>
     <Tokens>
-        <Token type="accesstoken" cascade="true">request.formparam.token</Token>
+        <Token type="accesstoken" cascade="true">jwt.JWT-VerifyAccessToken.decoded.claim.access_token</Token>
     </Tokens>
 </OAuthV2>

@@ -1,0 +1,8 @@
+<JavaCallout async="false" continueOnError="false" enabled="true" name='Java-Delay'>
+    <DisplayName>Java-Delay</DisplayName>
+    <Properties>
+        <Property name="delay">2000</Property>
+    </Properties>
+    <ClassName>com.google.apigee.edgecallouts.delay.DelayCallout</ClassName>
+    <ResourceURL>java://edge-custom-delay-20191206.jar</ResourceURL>
+</JavaCallout>

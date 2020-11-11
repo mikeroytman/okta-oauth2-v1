@@ -3,4 +3,5 @@
     <DisplayName>OAuth2-VerifyAccessToken</DisplayName>
     <Operation>VerifyAccessToken</Operation>
     <GenerateResponse enabled="true"/>
+    <AccessToken>jwt.JWT-VerifyAccessToken.decoded.claim.access_token</AccessToken>
 </OAuthV2>
