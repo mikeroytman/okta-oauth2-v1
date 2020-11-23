@@ -7,34 +7,36 @@ SPA->-Browser: Login widget
 User->Browser: (username + password)
 Browser->+Okta: POST /authn\n(username + password)
 Okta->-Browser: 200 OK\nsessionToken
-Browser->+ApigeeOAuth: (3) GET /authorize ((apigee_client_id + sessionToken +\nnonce + (client) redirect_uri + response_type +\nstate + scope + (hash) code_challenge +\ncode_challenge_method (SHA252))
+Browser->+ApigeeOAuth: (3) GET /authorize ((apigee_client_id + sessionToken +\nnonce + (client) redirect_uri + response_type +\nclient_state + scope + (hash) code_challenge +\ncode_challenge_method (SHA252))
 ApigeeOAuth->ApigeeOAuth: Validate apigee_client_id
 ApigeeOAuth->ApigeeOAuth: Validate client redirect_uri
-ApigeeOAuth->ApigeeOAuth: Creates a new state for okta
-ApigeeOAuth->ApigeeOAuth: Store client request in cache\nusing new state as cache key
-ApigeeOAuth->ApigeeOAuth: Replace apigee_client_id\nwith okta's client_id
-ApigeeOAuth->ApigeeOAuth: Replace (client) redirect_uri with\napigee redirect_uri so okta redirect\nto apigee instead of to client app
+ApigeeOAuth->ApigeeOAuth: Creates a new state for okta (okta_state)
+ApigeeOAuth->ApigeeOAuth: Store client request in cache (cached_client_request)\nusing okta_state as cache key
+ApigeeOAuth->ApigeeOAuth: Replace apigee_client_id\nwith okta_client_id
+ApigeeOAuth->ApigeeOAuth: Replace (client) redirect_uri with\napigee redirect_uri so okta redirects\nto apigee instead of to client app
 ApigeeOAuth->ApigeeOAuth: Build authorize request for okta
 ApigeeOAuth->-Browser: (3) 302 /authorize (to Okta endpoint)
-Browser->+Okta: (4) GET /authorize (client_id + sessionToken +\nnonce + redirect_uti + response_type +\nstate + scope + (hash) code_challenge +\ncode_challenge_method (SHA256)
+Browser->+Okta: (4) GET /authorize (okta_client_id + sessionToken +\nnonce + apigee_redirect_uti + response_type +\nstate + scope + (hash) code_challenge +\ncode_challenge_method (SHA256)
 Okta->Okta: Verify user session
-Okta->-Browser: (4) 302 /callback (code + state)\nThis redirect is back to apigee
-Browser->+ApigeeOAuth: GET /callback (code + state)
-ApigeeOAuth->ApigeeOAuth: Get client request from cache\nusing state query param
-ApigeeOAuth->ApigeeOAuth: Invalidates client request in cache
-ApigeeOAuth->ApigeeOAuth: Sets required values from client request\nto mint the authorization code (apigee's)
-ApigeeOAuth->ApigeeOAuth: Mints authorization code (apigee)
-ApigeeOAuth->ApigeeOAuth: Add okta's authorization_code\nto client request
-ApigeeOAuth->ApigeeOAuth: Cache client request using\napigee's authorization_code\nas cache key
+Okta->Okta: Store (hash) code_challenge and\ncode_challenge_method\nfor later matching
+Okta->-Browser: (4) 302 /callback (okta_code + okta_state)\nThis redirect is back to apigee
+Browser->+ApigeeOAuth: GET /callback (okta_code + okta_state)
+ApigeeOAuth->ApigeeOAuth: Lookup cache cached_client_request \nusing okta_state query param
+ApigeeOAuth->ApigeeOAuth: Removes cached_client_request from cache
+ApigeeOAuth->ApigeeOAuth: Sets required values from cached_client_request\nto mint the authorization code (apigee's)
+ApigeeOAuth->ApigeeOAuth: Mints authorization code (apigee_code)
+ApigeeOAuth->ApigeeOAuth: Add okta's authorization_code\nto cached_client_request
+ApigeeOAuth->ApigeeOAuth: Store cached_client_request in cache using\napigee_code authorization_code\nas cache key
 ApigeeOAuth->ApigeeOAuth: Builds client redirect
-ApigeeOAuth->-Browser: 302 /callback (code (apigee) + state (client))
-Browser->Browser: Extract code and state from URL
-Browser->+ApigeeOAuth: POST /token (code +\napigee_client_id + redirect_uri +\ngrant_type + (plain) code_verifier)
+ApigeeOAuth->-Browser: 302 /callback apigee_code + client_state
+Browser->Browser: Extract apigee_code and client_state from URL
+Browser->+ApigeeOAuth: POST /token (apigee_code +\napigee_client_id + redirect_uri +\ngrant_type + (plain) code_verifier)
 
-ApigeeOAuth->ApigeeOAuth: Recover client request from cache
-ApigeeOAuth->ApigeeOAuth: Invalidate client_request in cache
-ApigeeOAuth->ApigeeOAuth: Creates token request for okta using\nvalues from cache
-ApigeeOAuth->+Okta: POST /token (okta's code + client_id +\n (apigee) redirect_uri + grant_type +\n(plain) code_verifier)
+ApigeeOAuth->ApigeeOAuth: Lookup cache cached_client_request
+ApigeeOAuth->ApigeeOAuth: Remove cached_client_request from cache
+ApigeeOAuth->ApigeeOAuth: Creates token request for okta using\nvalues from cached_client_request
+ApigeeOAuth->+Okta: POST /token (okta_code + okta_client_id +\n (apigee) redirect_uri + grant_type +\n(plain) code_verifier)
+Okta->Okta: verify (plain) code_verifier
 
 Okta->+ApigeeOAuth: POST /inlinehook\n(user, id_token, and access_token\nmetadata)
 ApigeeOAuth->+Okta: GET /user/*/groups
@@ -49,9 +51,13 @@ Okta->-ApigeeOAuth: 200 OK
 
 ApigeeOAuth->+Okta: GET /logout (id_token)
 Okta->-ApigeeOAuth: 200 OK
-
-ApigeeOAuth->ApigeeOAuth: Create own JWT for access_token
 ApigeeOAuth->ApigeeOAuth: Create own JWT for id_token
+ApigeeOAuth->ApigeeOAuth: Create own JWT for access_token
+note over ApigeeOAuth
+id_token in embebded as
+custom claim of the access_token
+end note
+
 note over ApigeeOAuth
 Apigee own JWTs will form using
 metadata/claims from OKTA's JWTs
@@ -74,7 +80,7 @@ ApigeeOAuth->ApigeeOAuth: Verify access_token
 ApigeeOAuth->-Browser: 200 OK
 
 Browser->+ApigeeProxy: GET /protected-resource
-ApigeeProxy->ApigeeProxy: Verify access_token\nand scope
+ApigeeProxy->ApigeeProxy: Verify access_token\nand [ scope | membership ]
 ApigeeProxy->BCBSA: Get resource
 ApigeeProxy->-Browser: 200 Okta
 
